@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>dew2</display-name>
+  <welcome-file-list>
+    <welcome-file>dew2.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>HolaMundo</display-name>
+    <servlet-name>HolaMundo</servlet-name>
+    <servlet-class>HolaMundo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HolaMundo</servlet-name>
+    <url-pattern>/HolaMundo</url-pattern>
+  </servlet-mapping>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Protected Context</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  <servlet>
+    <description></description>
+    <display-name>Pagina_Literal</display-name>
+    <servlet-name>Pagina_Literal</servlet-name>
+    <servlet-class>Pagina_Literal</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Pagina_Literal</servlet-name>
+    <url-pattern>/Pagina_Literal</url-pattern>
+  </servlet-mapping>
+</web-app>
