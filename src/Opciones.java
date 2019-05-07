@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/tratar_opciones")
+
 public class Opciones extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
@@ -19,7 +19,7 @@ public class Opciones extends HttpServlet{
 			int num = Integer.parseInt(opcion);
 			switch (num) {
 			case 1:
-				response.sendRedirect("/Pagina_Literal");
+				response.sendRedirect("/dew2/Pagina_Literal");
 				break;
 
 			case 2:
@@ -27,9 +27,11 @@ public class Opciones extends HttpServlet{
 				break;
 				
 			default:
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 				break;
 			}
 		}catch (Exception e) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			System.out.print(e.getMessage());
 		}
 	}

@@ -35,4 +35,49 @@
     <servlet-name>Pagina_Literal</servlet-name>
     <url-pattern>/Pagina_Literal</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <display-name>carrito</display-name>
+    <servlet-name>carrito</servlet-name>
+    <servlet-class>carrito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>carrito</servlet-name>
+    <url-pattern>/carrito</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>carrito2</display-name>
+    <servlet-name>carrito2</servlet-name>
+    <servlet-class>carrito2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>carrito2</servlet-name>
+    <url-pattern>/carrito2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>Opciones</display-name>
+    <servlet-name>Opciones</servlet-name>
+    <servlet-class>Opciones</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tratar_opciones</servlet-name>
+    <url-pattern>/Opciones</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>ejercicioInvocacion</display-name>
+    <servlet-name>ejercicioInvocacion</servlet-name>
+    <servlet-class>ejercicioInvocacion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ejercicioInvocacion</servlet-name>
+    <url-pattern>/ejercicioInvocacion</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>miniteclado</display-name>
+    <servlet-name>miniteclado</servlet-name>
+    <servlet-class>miniteclado</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>miniteclado</servlet-name>
+    <url-pattern>/miniteclado</url-pattern>
+  </servlet-mapping>
 </web-app>
