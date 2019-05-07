@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -53,9 +54,26 @@ public class miniteclado extends HttpServlet {
 		HttpSession sesion = req.getSession(false);
 		if(sesion==null) doGet(req,resp);
 		else {
-			String tecla = req.getParameter("tecla");
-			String teclaSesion = sesion.getAttribute(tecla).toString();
-			sesion.setAttribute("tecla", teclaSesion+tecla);
+		    String tecla = req.getParameter("tecla");
+			String total = (String) sesion.getAttribute("tecla");
+			if(total==null)total="";
+			
+			if(tecla.equals("Espacio")) {
+				total = total +" ";
+			}
+			
+			else if(tecla.equals("Retroceso") && total.length()>0) {
+				total = total.substring(0,total.length()-1);
+			}
+			else if(tecla.equals("Retroceso") && total.length()<=0) {
+				total = "";
+			}
+			else {
+				total = total+tecla;				
+			}
+			
+			sesion.setAttribute("tecla",total);
+			
 			out.println("<!DOCTYPE html>\n" + 
 					"<html lang=\"es-es\">\n" + 
 					"<head>\n" + 
@@ -68,7 +86,7 @@ public class miniteclado extends HttpServlet {
 					"\n" + 
 					"<p>&Uacute;ltima tecla pulsada: <strong>"+ tecla +"</strong></p>\n" + 
 					"\n" + 
-					"<p>Total escrito: <strong>"+teclaSesion+tecla+"</strong>/p>\n" + 
+					"<p>Total escrito: <strong>'"+total+"'</strong></p>\n" + 
 					"<form action=\"miniteclado\" method=\"post\">\n" + 
 					"\n" + 
 					"<table style='border:none;'>\n" + 
