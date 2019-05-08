@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 public class maxiteclado extends HttpServlet{
 	int contador = 0;
 	
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession sesion = req.getSession(true);
@@ -88,16 +89,28 @@ public class maxiteclado extends HttpServlet{
 		if(sesion==null) doGet(req,resp);
 		else {
 		    String tecla = req.getParameter("tecla");
-		    if(tecla==null) tecla="";
-		    
-		    String color = req.getParameter("color");
-		    if(color==null) {
-		    	color = (String)sesion.getAttribute("color");
-		    }else {
-		    	out.println(color);
-		    	sesion.setAttribute("color", color);
+		    if(tecla==null) {
+		    	tecla="";
+		    	contador--;
 		    }
 		    
+		    String color ="";
+		    String colores[] = req.getParameterValues("color");
+		    String checkedR = "";
+		    String checkedG = "";
+		    String checkedB = "";
+		    if(colores==null) {
+		    	String colorAnt = (String)sesion.getAttribute("color");
+		    	color = "";
+	    	}else {
+	    		for(String colorArray: colores) {
+	    			color += colorArray;
+	    			if(colorArray.equals("r")) checkedR = "checked='checked'";
+	    			if(colorArray.equals("g")) checkedG = "checked='checked'";
+	    			if(colorArray.equals("b")) checkedB = "checked='checked'";		
+	    		}
+	    		sesion.setAttribute("color", color);
+	    	}
 		    String tamanyo = req.getParameter("size");
 		    if(tamanyo==null) {
 		    	tamanyo = (String)sesion.getAttribute("tamanyo");
@@ -159,9 +172,9 @@ public class maxiteclado extends HttpServlet{
 				"  <input type='submit' name='tecla' value='Espacio' />\n" + 
 				"</div>\n" + 
 				"<div style='float:right;'>\n" + 
-				"  <input type='checkbox' name='color' value='r' /><span class='r'>r</span>\n" + 
-				"  <input type='checkbox' name='color' value='g' /><span class='g'>g</span>\n" + 
-				"  <input type='checkbox' name='color' value='b' /><span class='b'>b</span>\n" + 
+				"  <input type='checkbox' name='color' value='r' "+checkedR+"/><span class='r'>r</span>\n" + 
+				"  <input type='checkbox' name='color' value='g' "+checkedG+"/><span class='g'>g</span>\n" + 
+				"  <input type='checkbox' name='color' value='b' "+checkedB+"/><span class='b'>b</span>\n" + 
 				"  <p>\n" + 
 				"    <button type='submit' name='font' value='f1' ><span class='f1'>Montserrat</span></button>\n" + 
 				"    <button type='submit' name='font' value='f2' ><span class='f2'>Fondamento</span></button>\n" + 
