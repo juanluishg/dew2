@@ -205,8 +205,10 @@ public class maxiteclado extends HttpServlet{
 	public void destroy() {
 		FileWriter fichero = null;
 		PrintWriter pw = null;
+		String ruta = getServletContext().getRealPath("/") + getServletContext().getInitParameter("fichero");
 		try {
-			fichero = new FileWriter(getServletContext().getInitParameter("fichero"));
+			
+			fichero = new FileWriter(ruta);
 			pw = new PrintWriter(fichero);
 			pw.print(contador);
 		}catch(Exception e) {
@@ -225,21 +227,31 @@ public class maxiteclado extends HttpServlet{
 		File fichero = null;
 		FileReader fr = null;
 		BufferedReader br = null;
-		
+		String ruta = getServletContext().getRealPath("/") + getServletContext().getInitParameter("fichero");
 		try {
-			fichero = new File(getServletContext().getInitParameter("fichero"));
+			
+			fichero = new File(ruta);
+			if(!fichero.exists()) {
+				contador = 0;
+				FileWriter nuevoFichero = new FileWriter(ruta);
+				PrintWriter pw = new PrintWriter(nuevoFichero);
+				pw.print(0);
+				pw.close();
+			}
+			else {
 			fr = new FileReader(fichero);
 			br = new BufferedReader(fr);
 			
 			String num = br.readLine();
 			contador = Integer.parseInt(num);
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
 			try {
 				fr.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 		}
 	}
