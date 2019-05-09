@@ -119,5 +119,11 @@
 		<servlet-name>Opciones</servlet-name>
 		<url-pattern>/Opciones</url-pattern>
 	</servlet-mapping>
+	
+	
+	<context-param>
+		<param-name>fichero</param-name>
+		<param-value>/recuento.txt</param-value>
+	</context-param>
 
 </web-app>

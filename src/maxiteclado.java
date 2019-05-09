@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -194,7 +198,49 @@ public class maxiteclado extends HttpServlet{
 				"</div>\n" + 
 				"</body>\n" + 
 				"</html>\n");
+		}
 	}
+
+	@Override
+	public void destroy() {
+		FileWriter fichero = null;
+		PrintWriter pw = null;
+		try {
+			fichero = new FileWriter(getServletContext().getInitParameter("fichero"));
+			pw = new PrintWriter(fichero);
+			pw.print(contador);
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}finally {
+			try {
+				fichero.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
-	
+
+	@Override
+	public void init() throws ServletException {
+		File fichero = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		
+		try {
+			fichero = new File(getServletContext().getInitParameter("fichero"));
+			fr = new FileReader(fichero);
+			br = new BufferedReader(fr);
+			
+			String num = br.readLine();
+			contador = Integer.parseInt(num);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				fr.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
+}
